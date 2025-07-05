@@ -65,7 +65,19 @@ const Navbar: React.FC = () => {
       <Link href="/" className="text-2xl font-extrabold text-white tracking-wider font-mono flex items-center gap-2 drop-shadow-lg">
         <span className="inline-block text-accent-400 animate-pulse">🎮</span> GameStore
       </Link>
-      <div className="flex items-center gap-6">
+      {/* Hamburger for mobile */}
+      <button
+        className="md:hidden flex flex-col justify-center items-center w-10 h-10 focus:outline-none"
+        onClick={() => setMenuOpen((open) => !open)}
+        aria-label="Toggle menu"
+        aria-expanded={menuOpen}
+      >
+        <span className={`block w-6 h-0.5 bg-white mb-1.5 transition-transform ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+        <span className={`block w-6 h-0.5 bg-white mb-1.5 transition-opacity ${menuOpen ? 'opacity-0' : ''}`}></span>
+        <span className={`block w-6 h-0.5 bg-white transition-transform ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+      </button>
+      {/* Desktop nav */}
+      <div className="hidden md:flex items-center gap-6">
         {/* My Transactions Icon with badge */}
         <Link href="/transactions" className="relative group flex items-center gap-2">
           <FaReceipt className="text-white text-2xl drop-shadow" />
@@ -118,6 +130,41 @@ const Navbar: React.FC = () => {
           )}
         </div>
       </div>
+      {/* Mobile menu dropdown */}
+      {menuOpen && (
+        <div className="md:hidden absolute top-full left-0 w-full bg-primary-900 border-t border-accent-400 shadow-lg z-40 animate-fade-in-up">
+          <div className="flex flex-col gap-2 py-4 px-6">
+            <Link href="/transactions" className="flex items-center gap-2 text-white font-bold text-lg py-2 border-b border-accent-700" onClick={() => setMenuOpen(false)}>
+              <FaReceipt className="text-white text-2xl" />
+              My Transactions
+              <span className="ml-auto bg-accent-500 text-white text-xs font-bold rounded-full px-2 py-0.5 shadow border-2 border-primary-900">
+                {transactionCount}
+              </span>
+            </Link>
+            <button
+              className="flex items-center gap-2 text-white font-bold text-lg py-2 border-b border-accent-700"
+              onClick={handleDarkModeToggle}
+            >
+              <span className="text-lg">{darkMode ? "🌙" : "☀️"}</span>
+              Dark Mode
+              <input
+                type="checkbox"
+                checked={darkMode}
+                onChange={handleDarkModeToggle}
+                className="ml-auto accent-accent-500 w-4 h-4 rounded focus:ring-2 focus:ring-accent-400"
+                aria-label="Toggle dark mode"
+              />
+            </button>
+            <Link
+              href="/logout"
+              className="flex items-center gap-2 text-white font-bold text-lg py-2"
+              onClick={() => { handleLogout(); setMenuOpen(false); }}
+            >
+              <span className="mr-2">🚪</span> Logout
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

@@ -65,13 +65,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  const login = (jwt: string, userObj: User) => {
+  const login = async (jwt: string, userObj: User) => {
     Cookies.set("token", jwt, { expires: 7 });
     Cookies.set("user", JSON.stringify(userObj), { expires: 7 });
     setToken(jwt);
     setUser(userObj);
     setAuthError(false);
-    fetchUserProfile();
+    await fetchProfile();
   };
 
   const logout = () => {
