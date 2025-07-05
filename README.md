@@ -1,3 +1,14 @@
+# Game Store Frontend
+
+**Live Demo:** [https://game-store-items.netlify.app/](https://game-store-items.netlify.app/)
+
+> **Note:**
+> To run the frontend locally, create a `.env` file in the `frontend` directory with the following content:
+>
+> ```env
+> NEXT_PUBLIC_API_BASE_URL=https://game-store-fastapi.onrender.com
+> ```
+
 # GameStore Frontend – Technical Overview
 
 ## Node Version
