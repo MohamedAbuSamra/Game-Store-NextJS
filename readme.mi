@@ -1,0 +1,20 @@
+# GameStore Frontend (Quick Start)
+
+## Requirements
+- Node.js v18.x or v20.x
+- npm (v9+)
+
+## Setup
+1. `npm install`
+2. Create `.env.local` with:
+   - `NEXT_PUBLIC_API_BASE_URL=https://your-api-url`
+3. `npm run dev` (for development)
+4. `npm run build && npm start` (for production)
+
+## Auth
+- Uses cookies for JWT auth
+- Protected routes redirect to `/login`
+
+## Ignored by git
+- node_modules, .next, .out, /build
+- .env*, .DS_Store, log files, .vercel, *.tsbuildinfo 
